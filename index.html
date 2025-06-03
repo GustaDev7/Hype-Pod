@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMOKE BRASIL - A Nº1 DE PODS EM BRASÍLIA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 50%, #2a0a3a 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .title-font { /* Usada para títulos principais da página */
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+        }
+
+        .font-orbitron-card { /* Especificamente para títulos dos cards do catálogo */
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700; /* Pode ajustar o peso se necessário */
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #06D8FE 0%, #C63EDB 50%, #FF4DA6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 15px rgba(198, 62, 219, 0.7);
+            transition: box-shadow 0.3s ease, transform 0.3s ease; /* Adicionada transição aqui */
+        }
+        
+        .glow-box:hover {
+            box-shadow: 0 0 25px rgba(198, 62, 219, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .hero-bg {
+            background:
+                radial-gradient(circle at center, rgba(6, 216, 254, 0.1) 0%, rgba(12, 20, 69, 0.7) 50%, rgba(10, 10, 26, 0.9) 100%),
+                url('hero-pod.png') no-repeat center center fixed; /* Adicione sua imagem 'hero-pod.png' na pasta */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        } 
+        .smoke-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><path fill="%23C63EDB" d="M400,200c0,0-100,50-100,150s100,150,100,150s100-50,100-150S400,200,400,200z"/><path fill="%2306D8FE" d="M300,300c0,0-50,25-50,75s50,75,50,75s50-25,50-75S300,300,300,300z"/><path fill="%23FF4DA6" d="M500,250c0,0-75,37.5-75,112.5s75,112.5,75,112.5s75-37.5,75-112.5S500,250,500,250z"/></svg>');
+            background-size: 100% 100%;
+            opacity: 0.15;
+            z-index: 0; /* Ajustado para estar atrás do conteúdo mas acima do body bg */
+            animation: smokeMove 30s infinite alternate;
+            pointer-events: none; /* Para não interferir com cliques */
+        }
+        
+        @keyframes smokeMove {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.15;
+            }
+            50% {
+                transform: translate(-5%, 5%) scale(1.1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translate(5%, -5%) scale(0.9);
+                opacity: 0.1;
+            }
+        }
+        
+        .neon-border {
+            position: relative;
+        }
+        
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #06D8FE, #C63EDB, #FF4DA6, #06D8FE);
+            background-size: 400%;
+            z-index: -1;
+            border-radius: inherit; /* Garante que a borda neon siga o border-radius do botão */
+            opacity: 0;
+            transition: opacity 0.5s; /* Apenas transição de opacidade */
+        }
+        
+        .neon-border:hover::after {
+            opacity: 1;
+            animation: neonGlow 3s linear infinite;
+        }
+        
+        @keyframes neonGlow {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+        
+        .vape-device { /* Se for usar, adicione sua imagem */
+            filter: drop-shadow(0 0 15px rgba(255, 77, 166, 0.7));
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .grid-pattern { /* Se for usar em algum elemento de fundo */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* === ESTILOS DA SEÇÃO DE CATÁLOGO "DIMENSÃO VAPOR" === */
+        .catalog-section {
+            padding-top: 6rem; /* py-24 */
+            padding-bottom: 6rem; /* py-24 */
+        }
+        
+        .space-background {
+            background-color: #06021D; /* Tom de azul/roxo bem escuro e profundo, harmonizando com o body */
+            position: relative;
+            overflow: hidden;
+            z-index: 1; /* Para garantir que as partículas fiquem atrás dos cards */
+        }
+
+        .space-background::before,
+        .space-background::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 1px; /* Tamanho das partículas */
+            height: 1px; /* Tamanho das partículas */
+            border-radius: 50%;
+            box-shadow: 
+                50vw 20vh 0 0px #FFF, 10vw 80vh 0 0px #FFF, 90vw 30vh 0 1px #FFF,
+                30vw 50vh 0 0px #FFF, 70vw 90vh 0 1px #FFF, 5vw 10vh 0 0px #FFF,
+                80vw 60vh 0 -1px rgba(255,255,255,0.5), 40vw 15vh 0 -1px rgba(255,255,255,0.5),
+                60vw 5vh 0 0px rgba(255,255,255,0.5), 25vw 75vh 0 -1px rgba(255,255,255,0.5);
+            animation: animateStars 50s linear infinite;
+            z-index: -1; /* Partículas atrás de tudo na seção */
+        }
+        .space-background::after { /* Segunda camada para mais densidade, com delay diferente */
+            box-shadow: 
+                15vw 45vh 0 0px #FFF, 85vw 5vh 0 1px #FFF, 50vw 95vh 0 0px #FFF,
+                5vw 65vh 0 1px #FFF, 95vw 85vh 0 0px #FFF,
+                35vw 25vh 0 -1px rgba(255,255,255,0.5), 75vw 70vh 0 0px rgba(255,255,255,0.5);
+            animation: animateStars 75s linear infinite alternate; /* Duração e direção diferentes */
+        }
+
+        @keyframes animateStars {
+            from {
+                transform: translateY(0px);
+            }
+            to {
+                transform: translateY(-100vh); /* Move as estrelas ao longo da altura da viewport */
+            }
+        }
+
+        :root { /* Cores Neon harmonizadas com sua paleta */
+            --neon-cyan: #06D8FE;
+            --neon-magenta: #C63EDB;
+            --neon-pink: #FF4DA6; 
+        }
+
+        .neon-glow-cyan {
+            box-shadow: 0 0 7px var(--neon-cyan), 0 0 15px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+        }
+        .neon-glow-magenta {
+            box-shadow: 0 0 7px var(--neon-magenta), 0 0 15px var(--neon-magenta), 0 0 20px var(--neon-magenta);
+        }
+        .neon-glow-pink {
+            box-shadow: 0 0 7px var(--neon-pink), 0 0 15px var(--neon-pink), 0 0 20px var(--neon-pink);
+        }
+        
+        .glassmorphism-card {
+            background-color: rgba(20, 10, 50, 0.3); /* Tom roxo escuro translúcido, harmonizado */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2; /* Cards acima do fundo de partículas */
+        }
+
+        .card-hover-effect {
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .card-hover-effect:hover {
+            transform: perspective(1200px) rotateX(3deg) rotateY(-4deg) scale(1.03) translateY(-5px);
+        }
+        
+        .btn-neon-catalog {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            border-width: 2px; 
+            font-weight: 600; /* Inter semi-bold */
+        }
+        .btn-neon-catalog:hover {
+            transform: translateY(-3px) scale(1.03);
+        }
+        /* === FIM DOS ESTILOS DA SEÇÃO DE CATÁLOGO === */
+        /* === ESTILOS DO FOOTER === */
+        .footer-bg {
+            background-color: rgba(6, 2, 29, 0.8); /* Tom roxo/azul bem escuro, levemente translúcido */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(198, 62, 219, 0.2); /* Borda sutil com cor neon magenta/roxo */
+        }
+    </style>
+</head>
+<body class="min-h-screen "> <div class="smoke-effect"></div>
+    
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden hero-bg z-10">
+        <div class="container mx-auto px-6 text-center relative z-10"> <h1 class="title-font text-4xl md:text-7xl lg:text-8xl mb-4 gradient-text">
+                HYPER TACABARIA
+            </h1>
+            <h2 class="text-md md:text-2xl lg:text-3xl font-light mb-8">
+                A MELHOR EM PODS EM BRASÍLIA <span class="text-2xl"></span>
+            </h2>
+            
+            <a href="#catalogo" class="neon-border inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-pink-500 rounded-full text-white font-bold text-lg uppercase tracking-wider transition-all duration-300 glow-box">
+                <span class="flex items-center justify-center">
+                    CATÁLOGO
+                </span>
+            </a>
+        </div>
+    </section>
+    
+<section id="catalogo" class="space-background min-h-screen catalog-section relative flex items-center justify-center text-center px-4">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-orbitron-card text-4xl sm:text-5xl text-center text-white mb-16">
+            NOSSO ARSENAL DE <span class="gradient-text">SABORES</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+
+            <!-- CARD 1 -->
+            <div class="card-container glassmorphism-card rounded-xl p-6 text-white card-hover-effect group relative overflow-hidden">
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 neon-glow-cyan rounded-xl pointer-events-none -z-10"></div>
+                
+                <div class="relative z-10 flex flex-col h-full">
+                    <!-- Substitua o SVG por uma imagem -->
+                    <div class="w-full h-56 bg-slate-700/30 rounded-lg mb-6 flex items-center justify-center border border-slate-600/50 overflow-hidden">
+                        <img src="1.png" alt="PODS DESCARTÁVEIS" class="object-cover h-full w-full rounded-lg" />
+                    </div>
+                    <h3 class="font-orbitron-card text-2xl mb-3 text-[var(--neon-cyan)]">PODS DESCARTÁVEIS</h3>
+                    <p class="text-sm text-slate-300 mb-6 flex-grow">
+                        Praticidade e sabor que te acompanham em qualquer lugar. Descubra a variedade explosiva!
+                    </p>
+                    <button class="btn-neon-catalog mt-auto w-full py-3 px-6 rounded-lg text-lg border-[var(--neon-cyan)] text-[var(--neon-cyan)] hover:bg-[var(--neon-cyan)] hover:text-black hover:shadow-[0_0_15px_var(--neon-cyan),_0_0_25px_var(--neon-cyan)]">
+                        CONFERIR <span class="opacity-0 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 inline-block">&rarr;</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="card-container glassmorphism-card rounded-xl p-6 text-white card-hover-effect group relative overflow-hidden">
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 neon-glow-magenta rounded-xl pointer-events-none -z-10"></div>
+                
+                <div class="relative z-10 flex flex-col h-full">
+                    <!-- Substitua o SVG por uma imagem -->
+                    <div class="w-full h-56 bg-slate-700/30 rounded-lg mb-6 flex items-center justify-center border border-slate-600/50 overflow-hidden">
+                        <img src="2.png" alt="JUICES & NICSALTS" class="object-cover h-full w-full rounded-lg" />
+                    </div>
+                    <h3 class="font-orbitron-card text-2xl mb-3 text-[var(--neon-magenta)]">JUICES & NICSALTS</h3>
+                    <p class="text-sm text-slate-300 mb-6 flex-grow">
+                        Uma galáxia de sabores líquidos para sua experiência vaping. Encontre sua essência.
+                    </p>
+                    <button class="btn-neon-catalog mt-auto w-full py-3 px-6 rounded-lg text-lg border-[var(--neon-magenta)] text-[var(--neon-magenta)] hover:bg-[var(--neon-magenta)] hover:text-black hover:shadow-[0_0_15px_var(--neon-magenta),_0_0_25px_var(--neon-magenta)]">
+                        CONFERIR <span class="opacity-0 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 inline-block">&rarr;</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="card-container glassmorphism-card rounded-xl p-6 text-white card-hover-effect group relative overflow-hidden">
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 neon-glow-pink rounded-xl pointer-events-none -z-10"></div>
+                
+                <div class="relative z-10 flex flex-col h-full">
+                    <!-- Substitua o SVG por uma imagem -->
+                    <div class="w-full h-56 bg-slate-700/30 rounded-lg mb-6 flex items-center justify-center border border-slate-600/50 overflow-hidden">
+                        <img src="3.png" alt="PODS RECARREGÁVEIS" class="object-cover h-full w-full rounded-lg" />
+                    </div>
+                    <h3 class="font-orbitron-card text-2xl mb-3 text-[var(--neon-pink)]">PODS RECARREGÁVEIS</h3>
+                    <p class="text-sm text-slate-300 mb-6 flex-grow">
+                        Tecnologia e design para um vape duradouro e customizável. Potência e estilo na sua mão.
+                    </p>
+                    <button class="btn-neon-catalog mt-auto w-full py-3 px-6 rounded-lg text-lg border-[var(--neon-pink)] text-[var(--neon-pink)] hover:bg-[var(--neon-pink)] hover:text-black hover:shadow-[0_0_15px_var(--neon-pink),_0_0_25px_var(--neon-pink)]">
+                        CONFERIR <span class="opacity-0 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 inline-block">&rarr;</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer-bg text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Grid de seções -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            
+            <!-- Marca -->
+            <div>
+                <h3 class="font-orbitron-card text-2xl mb-4 gradient-text">HYPER TACABARIA</h3> 
+                <p class="text-slate-300 leading-relaxed text-sm">
+                    Sua dimensão de sabores cósmicos em Brasília. Qualidade e variedade em pods, juices e acessórios intergalácticos.
+                </p>
+            </div>
+
+            <!-- Horários -->
+            <div>
+                <h3 class="font-orbitron-card text-xl mb-4 text-white">Atendimento Online</h3> 
+                <ul class="space-y-2 text-slate-300 text-sm"> 
+                    <li>Segunda a Sexta: <span class="text-white font-semibold">08h - 00h</span></li>
+                    <li>Sábado: <span class="text-white font-semibold">10h - 15h</span></li>
+                    <li>Domingo: <span class="text-white font-semibold">10h - 15h</span></li>
+                </ul>
+                <p class="text-xs text-slate-400 mt-2">(Atendimento via WhatsApp)</p>
+            </div>
+
+            <!-- Contato -->
+            <div>
+                <h3 class="font-orbitron-card text-xl mb-4 text-white">Contato Interestelar</h3>
+                <ul class="space-y-3 text-slate-300 text-sm"> 
+                    <li>
+                        <a href="https://wa.me/SEUNUMEROWHATSAPP" target="_blank" class="flex items-center hover:text-[var(--neon-cyan)] transition-colors">
+                            <i class="fab fa-whatsapp mr-3 text-[var(--neon-cyan)] text-lg"></i>
+                            (61) 9XXXX-XXXX 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:contato@hypertacabaria.com" class="flex items-center hover:text-[var(--neon-cyan)] transition-colors">
+                            <i class="fas fa-envelope mr-3 text-[var(--neon-cyan)] text-lg"></i> 
+                            contato@hypertacabaria.com 
+                        </a>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-map-marker-alt mr-3 text-[var(--neon-cyan)] text-lg"></i> 
+                        <span>Brasília - DF, Base Estelar</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div>
+                <h3 class="font-orbitron-card text-xl mb-4 text-white">Siga nossa Órbita</h3>
+                <div class="flex space-x-4">
+                    <a href="#SEU_LINK_INSTAGRAM" target="_blank" class="group w-10 h-10 bg-slate-800/70 rounded-full flex items-center justify-center hover:bg-[var(--neon-magenta)] transition-all duration-300 transform hover:scale-110" aria-label="Instagram">
+                        <i class="fab fa-instagram text-xl text-slate-300 group-hover:text-white"></i>
+                    </a>
+                    <a href="https://wa.me/SEUNUMEROWHATSAPP" target="_blank" class="group w-10 h-10 bg-slate-800/70 rounded-full flex items-center justify-center hover:bg-[var(--neon-cyan)] transition-all duration-300 transform hover:scale-110" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp text-xl text-slate-300 group-hover:text-white"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Linha inferior -->
+        <div class="border-t border-slate-700/60 mt-12 pt-6 flex flex-col sm:flex-col md:flex-row justify-between items-center gap-4 text-center w-full">
+            <p class="text-slate-400 text-sm">
+                © 2025 Hyper Tacabaria. Todos os direitos reservados.
+            </p> 
+
+            <p class="text-xs text-slate-500">
+                Design e Desenvolvimento feito por 
+                <a href="https://instagram.com/gusta.ia" target="_blank" class="text-[var(--neon-pink)] hover:underline">@gusta.ia</a>.
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Simple scroll to anchor
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // JS para o catálogo (se necessário no futuro para interações mais complexas)
+        console.log("Dimensão Vapor carregada e pronta para impressionar! ✨");
+
+    </script>
+<!-- Botão WhatsApp Flutuante -->
+<a href="https://wa.me/5561991957002" target="_blank"
+   class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+   aria-label="Fale conosco pelo WhatsApp">
+  <i class="fab fa-whatsapp text-3xl"></i>
+</a>
+</body>
+</html>
